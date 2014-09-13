@@ -5,6 +5,7 @@ import org.springframework.boot.context.embedded.ServletContextInitializer;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 
+import static org.lightadmin.logging.configurer.LightConfigurerWebApplicationInitializer.LIGHT_CONFIGURER_BACK_TO_SITE_URL;
 import static org.lightadmin.logging.configurer.LightConfigurerWebApplicationInitializer.LIGHT_CONFIGURER_BASE_URL;
 
 /**
@@ -24,6 +25,7 @@ public class LightConfigurerServletContextInitializer implements ServletContextI
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
         servletContext.setInitParameter(LIGHT_CONFIGURER_BASE_URL, baseUrl);
+        servletContext.setInitParameter(LIGHT_CONFIGURER_BACK_TO_SITE_URL, "http://lightadmin.org");
 
         new LightConfigurerWebApplicationInitializer().onStartup(servletContext);
     }

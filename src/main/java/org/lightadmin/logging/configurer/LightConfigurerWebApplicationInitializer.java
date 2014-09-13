@@ -11,7 +11,6 @@ import org.springframework.web.servlet.DispatcherServlet;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
-
 import java.util.regex.Pattern;
 
 import static org.springframework.core.Ordered.LOWEST_PRECEDENCE;
@@ -27,6 +26,7 @@ import static org.springframework.util.StringUtils.isEmpty;
 public class LightConfigurerWebApplicationInitializer implements WebApplicationInitializer {
 
     public static final String LIGHT_CONFIGURER_BASE_URL = "light:configurer:base-url";
+    public static final String LIGHT_CONFIGURER_BACK_TO_SITE_URL = "light:configurer:back-to-site-url";
 
     private static final Pattern BASE_URL_PATTERN = Pattern.compile("(/)|(/[\\w-]+)+");
 
