@@ -1,4 +1,4 @@
-# LightAdmin - Pluggable Java web library for runtime logging level configuration
+# Pluggable Java web library for runtime logging level configuration
 
 ## Screenshots
 
