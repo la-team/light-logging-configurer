@@ -1,5 +1,7 @@
 # Pluggable Java web library for runtime logging level configuration
 
+<img src="https://travis-ci.org/la-team/light-logging-configurer.png?branch=master"/>
+
 The goal of the project is to provide a logger configuration UI for changing logging levels directly from web interface.
 
 ## License ##
