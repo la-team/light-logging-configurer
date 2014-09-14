@@ -2,6 +2,24 @@
 
 The goal of the project is to provide a logger configuration UI for changing logging levels directly from web interface.
 
+## License ##
+
+* <b>Light Logging Configurer</b> is released under version 2.0 of the Apache License.
+
+## Integration examples ##
+
+* [LightAdmin and Spring Boot](https://github.com/la-team/lightadmin-springboot)
+* [LightAdmin DEMO](https://github.com/la-team/lightadmin-demo)
+
+## Documentation & Support ##
+
+* Web site: [lightadmin.org](http://lightadmin.org)
+* Live demo: [lightadmin.org/demo/logger](http://lightadmin.org/demo/logger/)
+* CI Server: [lightadmin.org/jenkins](http://lightadmin.org/jenkins)
+* Use Google Groups for posting questions: [groups.google.com/group/lightadmin](http://groups.google.com/group/lightadmin)
+* Use Stack Overflow for posting questions with <b>lightadmin</b> tag
+* Contact LightAdmin Team directly on Twitter: <b>@lightadm_team</b>
+
 ## Getting started ##
 
 Light Logging Configurer is designed in such a way that it should integrate with your existing Java web applications with very little effort.
@@ -77,24 +95,6 @@ public class Application extends SpringBootServletInitializer {
   </root>
 </configuration>
 ```
-
-## License ##
-
-* <b>Light Logging Configurer</b> is released under version 2.0 of the Apache License.
-
-## Integration examples ##
-
-* [LightAdmin and Spring Boot](https://github.com/la-team/lightadmin-springboot)
-* [LightAdmin DEMO](https://github.com/la-team/lightadmin-demo)
-
-## Documentation & Support ##
-
-* Web site: [lightadmin.org](http://lightadmin.org)
-* Live demo: [lightadmin.org/demo/logger](http://lightadmin.org/demo/logger/)
-* CI Server: [lightadmin.org/jenkins](http://lightadmin.org/jenkins)
-* Use Google Groups for posting questions: [groups.google.com/group/lightadmin](http://groups.google.com/group/lightadmin)
-* Use Stack Overflow for posting questions with <b>lightadmin</b> tag
-* Contact LightAdmin Team directly on Twitter: <b>@lightadm_team</b>
 
 ## Screenshots
 
