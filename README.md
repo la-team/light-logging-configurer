@@ -78,7 +78,7 @@ public class Application extends SpringBootServletInitializer {
 </configuration>
 ```
 
-### License
+## License ##
 
 * <b>Light Logging Configurer</b> is released under version 2.0 of the Apache License.
 
@@ -87,7 +87,7 @@ public class Application extends SpringBootServletInitializer {
 * [LightAdmin and Spring Boot](https://github.com/la-team/lightadmin-springboot)
 * [LightAdmin DEMO](https://github.com/la-team/lightadmin-demo)
 
-### Documentation & Support
+## Documentation & Support ##
 
 * Web site: [lightadmin.org](http://lightadmin.org)
 * Live demo: [lightadmin.org/demo/logger](http://lightadmin.org/demo/logger)
