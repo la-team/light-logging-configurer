@@ -7,7 +7,7 @@
     <groupId>org.lightadmin</groupId>
     <artifactId>light-logging-configurer</artifactId>
     <packaging>jar</packaging>
-    <version>1.0.0.RC1</version>
+    <version>1.0.0.BUILD-SNAPSHOT</version>
 
     <name>Light Logging Configurer</name>
     <description>Pluggable Java web library for runtime logging level configuration</description>
@@ -17,7 +17,7 @@
 
     <organization>
         <name>LA Team</name>
-        <url>http://lightadmin.org</url>
+        <url>http://la-team.github.io/light-logging-configurer/</url>
     </organization>
 
     <licenses>
