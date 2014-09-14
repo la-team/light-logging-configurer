@@ -11,13 +11,13 @@
 
     <name>Light Logging Configurer</name>
     <description>Pluggable Java web library for runtime logging level configuration</description>
-    <url>http://lightadmin.org</url>
+    <url>http://la-team.github.io/light-logging-configurer/</url>
 
     <inceptionYear>2014</inceptionYear>
 
     <organization>
         <name>LA Team</name>
-        <url>http://la-team.github.io/light-logging-configurer/</url>
+        <url>http://lightadmin.org</url>
     </organization>
 
     <licenses>
