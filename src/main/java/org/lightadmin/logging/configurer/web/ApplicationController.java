@@ -15,16 +15,13 @@
  */
 package org.lightadmin.logging.configurer.web;
 
+import org.lightadmin.logging.configurer.LoggingConfigurerSettings;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.inject.Inject;
-import javax.servlet.ServletContext;
 
-import static org.lightadmin.logging.configurer.LightConfigurerWebApplicationInitializer.LIGHT_CONFIGURER_BACK_TO_SITE_URL;
-import static org.lightadmin.logging.configurer.LightConfigurerWebApplicationInitializer.LIGHT_CONFIGURER_BASE_URL;
-import static org.springframework.util.StringUtils.isEmpty;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentContextPath;
 
@@ -37,23 +34,17 @@ import static org.springframework.web.servlet.support.ServletUriComponentsBuilde
 public class ApplicationController {
 
     @Inject
-    private ServletContext servletContext;
+    private LoggingConfigurerSettings loggingConfigurerSettings;
 
     @RequestMapping(value = "/", method = GET)
     public String index(Model model) {
-        model.addAttribute("baseUrl", baseUri());
-        model.addAttribute("backToSiteUrl", backToSiteUrl());
+        model.addAttribute("baseUrl", absoluteBaseUrl());
+        model.addAttribute("backToSiteUrl", loggingConfigurerSettings.getBackToSiteUrl());
+        model.addAttribute("demoMode", loggingConfigurerSettings.isDemoMode());
         return "index";
     }
 
-    private String baseUri() {
-        String applicationBaseUrl = servletContext.getInitParameter(LIGHT_CONFIGURER_BASE_URL);
-
-        return fromCurrentContextPath().path(applicationBaseUrl).build().toUriString();
-    }
-
-    private String backToSiteUrl() {
-        String backToSiteUrl = servletContext.getInitParameter(LIGHT_CONFIGURER_BACK_TO_SITE_URL);
-        return isEmpty(backToSiteUrl) ? "http://lightadmin.org" : backToSiteUrl;
+    private String absoluteBaseUrl() {
+        return fromCurrentContextPath().path(loggingConfigurerSettings.getApplicationBaseUrl()).build().toUriString();
     }
 }

@@ -15,6 +15,8 @@
  */
 package org.lightadmin.logging.configurer.config;
 
+import org.lightadmin.logging.configurer.LoggingConfigurerSettings;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -26,6 +28,8 @@ import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.resourceresolver.SpringResourceResourceResolver;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.TemplateResolver;
+
+import javax.servlet.ServletContext;
 
 /**
  * TODO: Document me!
@@ -45,7 +49,13 @@ public class LightLoggerConfiguration extends WebMvcConfigurerAdapter {
     }
 
     @Bean
-    protected SpringResourceResourceResolver thymeleafResourceResolver() {
+    @Autowired
+    public LoggingConfigurerSettings loggingConfigurerSettings(ServletContext servletContext) {
+        return new LoggingConfigurerSettings(servletContext);
+    }
+
+    @Bean
+    public SpringResourceResourceResolver thymeleafResourceResolver() {
         return new SpringResourceResourceResolver();
     }
 

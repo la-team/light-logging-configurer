@@ -40,34 +40,33 @@ import static org.springframework.util.StringUtils.isEmpty;
 @Order(LOWEST_PRECEDENCE)
 public class LightConfigurerWebApplicationInitializer implements WebApplicationInitializer {
 
-    public static final String LIGHT_CONFIGURER_BASE_URL = "light:configurer:base-url";
-    public static final String LIGHT_CONFIGURER_BACK_TO_SITE_URL = "light:configurer:back-to-site-url";
-
     private static final Pattern BASE_URL_PATTERN = Pattern.compile("(/)|(/[\\w-]+)+");
 
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
-        if (lightConfigurerNotEnabled(servletContext)) {
+        LoggingConfigurerSettings configuration = new LoggingConfigurerSettings(servletContext);
+
+        if (lightConfigurerNotEnabled(configuration)) {
             servletContext.log("Light Configurer Module is disabled by default. Skipping.");
             return;
         }
 
-        if (notValidBaseUrl(lightConfigurerBaseUrl(servletContext))) {
+        if (notValidBaseUrl(configuration.getApplicationBaseUrl())) {
             servletContext.log("Light Configurer Module's 'baseUrl' property must match " + BASE_URL_PATTERN.pattern() + " pattern. Skipping.");
             return;
         }
 
-        registerLightConfigurerDispatcher(servletContext);
-        registerHiddenHttpMethodFilter(servletContext);
-        registerCharsetFilter(servletContext);
+        registerLightConfigurerDispatcher(servletContext, configuration);
+        registerHiddenHttpMethodFilter(servletContext, configuration);
+        registerCharsetFilter(servletContext, configuration);
     }
 
-    private void registerLightConfigurerDispatcher(final ServletContext servletContext) {
+    private void registerLightConfigurerDispatcher(final ServletContext servletContext, LoggingConfigurerSettings configuration) {
         final DispatcherServlet lightConfigurerDispatcher = new DispatcherServlet(createApplicationContext());
 
         ServletRegistration.Dynamic lightConfigurerDispatcherRegistration = servletContext.addServlet("light-configurer-dispatcher", lightConfigurerDispatcher);
         lightConfigurerDispatcherRegistration.setLoadOnStartup(2);
-        lightConfigurerDispatcherRegistration.addMapping(dispatcherUrlMapping(lightConfigurerBaseUrl(servletContext)));
+        lightConfigurerDispatcherRegistration.addMapping(dispatcherUrlMapping(configuration.getApplicationBaseUrl()));
     }
 
     private AnnotationConfigWebApplicationContext createApplicationContext() {
@@ -82,14 +81,14 @@ public class LightConfigurerWebApplicationInitializer implements WebApplicationI
         return new Class[]{LightLoggerConfiguration.class};
     }
 
-    private void registerHiddenHttpMethodFilter(final ServletContext servletContext) {
-        final String urlMapping = urlMapping(lightConfigurerBaseUrl(servletContext));
+    private void registerHiddenHttpMethodFilter(final ServletContext servletContext, LoggingConfigurerSettings configuration) {
+        final String urlMapping = urlMapping(configuration.getApplicationBaseUrl());
 
         servletContext.addFilter("LightConfigurerHiddenHttpMethodFilter", HiddenHttpMethodFilter.class).addMappingForUrlPatterns(null, false, urlMapping);
     }
 
-    private void registerCharsetFilter(final ServletContext servletContext) {
-        final String urlMapping = urlMapping(lightConfigurerBaseUrl(servletContext));
+    private void registerCharsetFilter(ServletContext servletContext, LoggingConfigurerSettings configuration) {
+        final String urlMapping = urlMapping(configuration.getApplicationBaseUrl());
 
         servletContext.addFilter("LightConfigurerCharsetFilter", characterEncodingFilter()).addMappingForServletNames(null, false, urlMapping);
     }
@@ -119,15 +118,11 @@ public class LightConfigurerWebApplicationInitializer implements WebApplicationI
         return "/".equals(url);
     }
 
-    private boolean lightConfigurerNotEnabled(final ServletContext servletContext) {
-        return isEmpty(lightConfigurerBaseUrl(servletContext));
+    private boolean lightConfigurerNotEnabled(final LoggingConfigurerSettings configuration) {
+        return isEmpty(configuration.getApplicationBaseUrl());
     }
 
     private boolean notValidBaseUrl(String url) {
         return !BASE_URL_PATTERN.matcher(url).matches();
-    }
-
-    private String lightConfigurerBaseUrl(ServletContext servletContext) {
-        return servletContext.getInitParameter(LIGHT_CONFIGURER_BASE_URL);
     }
 }

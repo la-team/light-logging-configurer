@@ -45,7 +45,7 @@
             <li><a th:href="${backToSiteUrl}"><i class="fa fa-reply"></i> Back To Site</a></li>
         </ul>
 
-        <ul class="nav navbar-nav navbar-right">
+        <ul class="nav navbar-nav navbar-right" th:if="${demoMode}">
             <li>
                 <img th:src="${baseUrl} + '/images/ukraine-peace.png'"
                      style="height: 20px;position: relative;top: -9px;left: 15px; cursor: pointer;" onclick="donate()"
@@ -55,6 +55,8 @@
                         style="width:130px; height:30px; position: relative; left: 30px; top: 8px;"></iframe>
             </li>
         </ul>
+
+        <a th:if="${demoMode}" id="fork-me" href="https://github.com/la-team/light-admin" style="position: absolute;right: 0;top: 0;z-index: 1;"><img th:src="${baseUrl} + '/images/fork-me-on-github.png'" alt="Fork me on GitHub"/></a>
     </div>
 </div>
 
