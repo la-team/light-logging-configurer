@@ -5,13 +5,13 @@ var loggingPresenter = new LoggingPresenter("#logger-output");
 $(function() {
     lightDataTable.initialize();
 
-    loggingPresenter.connect(applicationBaseUrl + '/ws');
+    loggingPresenter.initialize(applicationBaseUrl + '/ws');
 
     showHostName();
 });
 
 $( window ).unload(function() {
-    loggingPresenter.disconnect();
+    loggingPresenter.destroy();
 });
 
 function showHostName() {

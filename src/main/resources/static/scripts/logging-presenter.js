@@ -28,21 +28,37 @@ function LoggingPresenter(view) {
         );
     }
 
+    function showLegacyContainerMessage(errorMessage) {
+        $(view).parent().html(
+                "<div class=\"alert alert-block alert-danger fade in widget-inner\">"
+                + "<h5>Something bad happened!</h5>"
+                + "<hr>"
+                + "<p>" + errorMessage + "</p>"
+                + "</div>"
+        );
+    }
+
     function showLoggingEvent(loggingEvent) {
         $(view).append(loggingEvent['message'] + '\n');
+    }
+
+    function successCallback(frame) {
+        if (console.log) {
+            console.log('Connected: ' + frame);
+        }
+        stompClient.subscribe('/topic/logs', function (data) {
+            showLoggingEvent(JSON.parse(data.body));
+        });
+    }
+
+    function failureCallback(error) {
+        showLegacyContainerMessage(error);
     }
 
     function connect(url) {
         var socket = new SockJS(url);
         stompClient = Stomp.over(socket);
-        stompClient.connect({}, function (frame) {
-            if (console.log) {
-                console.log('Connected: ' + frame);
-            }
-            stompClient.subscribe('/topic/logs', function (data) {
-                showLoggingEvent(JSON.parse(data.body));
-            });
-        });
+        stompClient.connect({}, successCallback, failureCallback);
     }
 
     function disconnect() {
@@ -55,14 +71,14 @@ function LoggingPresenter(view) {
     }
 
     return {
-        connect: function (url) {
+        initialize: function (url) {
             if (window.WebSocket) {
                 connect(url);
             } else {
                 showLegacyBrowserMessage();
             }
         },
-        disconnect: function () {
+        destroy: function () {
             disconnect();
         }
     }
