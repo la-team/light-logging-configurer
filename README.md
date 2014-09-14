@@ -4,12 +4,12 @@ The goal of the project is to provide a logger configuration UI for changing log
 
 ## License ##
 
-* <b>Light Logging Configurer</b> is released under version 2.0 of the Apache License.
+<b>Light Logging Configurer</b> is released under version 2.0 of the Apache License.
 
 ## Integration examples ##
 
-* [LightAdmin and Spring Boot](https://github.com/la-team/lightadmin-springboot)
-* [LightAdmin DEMO](https://github.com/la-team/lightadmin-demo)
+* [Spring Boot](https://github.com/la-team/lightadmin-springboot)
+* [Standard Web Application](https://github.com/la-team/lightadmin-demo)
 
 ## Documentation & Support ##
 
