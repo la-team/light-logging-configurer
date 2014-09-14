@@ -73,7 +73,19 @@ The equivalent of the above in a standard <b>web.xml</b> will also work identica
 To install Light Logging Configurer alongside your existing Spring Boot web application, you need to register ServletContextInitializer.
 
 ```java
+@Configuration
+@EnableAutoConfiguration(exclude = {ThymeleafAutoConfiguration.class, SecurityAutoConfiguration.class})
 public class Application extends SpringBootServletInitializer {
+  
+  public static void main(String[] args) throws Exception {
+    SpringApplication.run(LightAdminBootApplication.class, args);
+  }
+
+  @Override
+  protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+    return application.sources(LightAdminBootApplication.class);
+  }
+    
   @Bean
   public ServletContextInitializer lightConfigurerServletContextInitializer() {
       return new LightConfigurerServletContextInitializer("/logger");
