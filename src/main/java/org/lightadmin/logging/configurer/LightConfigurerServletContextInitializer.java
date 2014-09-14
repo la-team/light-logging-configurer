@@ -20,6 +20,8 @@ import org.springframework.boot.context.embedded.ServletContextInitializer;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 
+import static org.lightadmin.logging.configurer.LoggingConfigurerSettings.*;
+
 /**
  * TODO: Document me!
  *
@@ -28,16 +30,28 @@ import javax.servlet.ServletException;
 @SuppressWarnings("unused")
 public class LightConfigurerServletContextInitializer implements ServletContextInitializer {
 
-    private final String baseUrl;
+    private final LoggingConfigurerSettings configurerSettings;
 
     public LightConfigurerServletContextInitializer(String baseUrl) {
-        this.baseUrl = baseUrl;
+        this.configurerSettings = new LoggingConfigurerSettings(baseUrl);
     }
 
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
-        servletContext.setInitParameter(LoggingConfigurerSettings.LIGHT_CONFIGURER_BASE_URL, baseUrl);
+        servletContext.setInitParameter(LIGHT_CONFIGURER_BASE_URL, configurerSettings.getApplicationBaseUrl());
+        servletContext.setInitParameter(LIGHT_CONFIGURER_BACK_TO_SITE_URL, configurerSettings.getBackToSiteUrl());
+        servletContext.setInitParameter(LIGHT_CONFIGURER_DEMO_MODE, Boolean.toString(configurerSettings.isDemoMode()));
 
         new LightConfigurerWebApplicationInitializer().onStartup(servletContext);
+    }
+
+    public LightConfigurerServletContextInitializer backToSiteUrl(String url) {
+        this.configurerSettings.setBackToSiteUrl(url);
+        return this;
+    }
+
+    public LightConfigurerServletContextInitializer demoMode() {
+        this.configurerSettings.setDemoMode(true);
+        return this;
     }
 }
