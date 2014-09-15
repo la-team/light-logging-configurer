@@ -16,7 +16,7 @@ The goal of the project is to provide a logger configuration UI for changing log
 ## Documentation & Support ##
 
 * Web site: [lightadmin.org](http://lightadmin.org)
-* Live demo: [lightadmin.org/demo/logger/](http://lightadmin.org/demo/logger/)
+* Live demo: [http://light-logging-configurer.herokuapp.com/](http://light-logging-configurer.herokuapp.com/)
 * CI Server: [lightadmin.org/jenkins](http://lightadmin.org/jenkins)
 * Use Google Groups for posting questions: [groups.google.com/group/lightadmin](http://groups.google.com/group/lightadmin)
 * Use Stack Overflow for posting questions with <b>lightadmin</b> tag
