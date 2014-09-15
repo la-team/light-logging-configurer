@@ -12,6 +12,7 @@ The goal of the project is to provide a logger configuration UI for changing log
 
 * [Spring Boot](https://github.com/la-team/lightadmin-springboot)
 * [Standard Web Application](https://github.com/la-team/lightadmin-demo)
+* [Light Logging Configurer running on Heroku](https://github.com/la-team/light-logging-configurer-heroku)
 
 ## Documentation & Support ##
 
